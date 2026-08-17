@@ -1,28 +1,18 @@
 # Minto
 
-A skill that applies Barbara Minto's Pyramid Principle: structure the argument first, then render it in the format you asked for — mail, memo, report, blog post, deck, proposal, ad, landing page, PDP, or executive summary.
+**Minto makes Claude work out the argument before it writes a word — and then renders that argument in the format you actually need.**
 
-It is **not a formatter**. The work is the thinking: group the ideas, derive the higher-order statement, test the logic. The format comes last.
+A Claude skill: one thinking engine, fourteen format renderers, and a validation pass that refuses to fill a structure with material it doesn't have.
 
----
-
-## What this is
-
-A skill is a folder of instructions. When you invoke it, `SKILL.md` is loaded into Claude's context and changes how Claude approaches that one response — in this case, forcing it to build and validate an argument structure before writing anything. It is not code, it calls no tools, and it does nothing on its own. Once the response is done, its influence ends.
-
-That means the whole skill is plain text you can read and edit. If you disagree with a rule, change the line.
-
-## Where it runs
-
-Anywhere Claude loads skills — Claude Code, Cowork, the Claude apps. There is no environment dependency: the frontmatter declares only `name` and `description` (no `allowed-tools`), and neither `SKILL.md` nor any of the four reference files calls a tool, an MCP server, or a platform API.
-
-What *does* differ per environment is how you install it. That is the only surface-specific part, and it is covered below.
+→ [**Download `minto.skill`**](https://github.com/smplx-c/minto-skill/releases/latest/download/minto.skill) for Cowork and the Claude app, or clone the folder for Claude Code — see [Installation](#installation).
 
 ---
 
-## What it gives you
+## The problem it solves
 
-Left alone, a language model writes in a predictable shape: it mirrors the order of the input, builds context before answering, and puts the recommendation at the end. Headings become topics instead of statements, and arguments come in threes even when only two of them carry weight. It reads smoothly and is still hard to check, because what the claim rests on stays unclear.
+Left alone, a language model writes in a predictable shape. It mirrors the order of your input, builds context before answering, and puts the recommendation at the end. Headings become topics instead of statements, and arguments come in threes even when only two of them carry weight.
+
+It reads smoothly and is still hard to check, because what the claim rests on stays unclear.
 
 The same notes, without and with the skill:
 
@@ -30,61 +20,69 @@ The same notes, without and with the skill:
 
 > **With:** "I'd hold the 40k until the mobile PDP is fixed. Traffic isn't our constraint — we're up 17% year over year. The problem is conversion, and it's almost entirely mobile …"
 
-Four things concretely:
-
-**The answer comes first.** Recommendation, then reasoning, then evidence. Read only the opening paragraph and you have the decision; go deeper and you find each proof point sitting under the claim it actually supports.
-
-**Finding, conclusion and recommendation stay separate.** "Mobile conversion fell 22%", "the decline is concentrated on mobile" and "we should fix the PDP first" are three different things. Blending them is the most common failure in internal writing, because it makes recommendations look like facts.
-
-**Assumptions stay assumptions.** The skill distinguishes internally between fact, inference, assumption and hypothesis, and invents nothing to fill a structure — no figures, no testimonials, no proof points. Given thin material it names what's missing instead of producing a convincing-sounding gap. For proposals and landing pages this is the point that matters most.
-
-**The standard is repeatable.** A mail, a proposal and a product page all pass the same checks, regardless of who asked and how well the prompt happened to be worded that day. Across a team it creates shared vocabulary: "what's the actual core message here?" becomes an answerable question.
-
-### What it doesn't give you
-
-It doesn't make the model smarter, and it doesn't rescue thin material — it only makes the gap visible. For a two-line answer it's overhead. And Claude can do much of this without the skill if you describe it well enough; the gain is not having to describe it every time.
+Same facts. Only the second one can be acted on, or argued with.
 
 ---
 
-## Installing
+## How Minto intervenes
 
-> Install the **whole `minto/` folder**, never `SKILL.md` on its own. Without `references/`, the skill fails silently rather than visibly: it instructs itself to read the renderer file for the chosen mode, doesn't find it, and produces generically structured output.
+**The answer moves to the front.** Recommendation first, then reasoning, then evidence. Read only the opening paragraph and you have the decision; go deeper and each proof point sits under the claim it actually supports — not beside it.
 
-### Cowork and the Claude apps
+**Finding, conclusion and recommendation stay separate.** "Mobile conversion fell 22%", "the decline is concentrated on mobile" and "we should fix the PDP first" are three different logical types. Blending them is the most common failure in internal writing, because it makes recommendations look like facts.
 
-Click the `minto.skill` file card and choose **Save skill**. The archive carries `SKILL.md` and the full `references/` folder, so everything installs together, and the skill is saved to your profile rather than to one surface.
+**Assumptions stay assumptions.** The skill sorts its own material into fact, inference, assumption and hypothesis, and invents nothing to complete a structure — no figures, no testimonials, no proof points. Given thin material it names what's missing instead of producing a convincing-sounding gap. For proposals and landing pages this is the point that matters most.
 
-Whether the button appears depends on your organisation's skill settings.
+**Nothing renders until the structure holds.** Before drafting, four checks run every time: does the top statement answer the actual question, can every parent claim be derived from what sits beneath it, are sibling points the same kind of thing, and does each observation lead somewhere. Four more run at greater depth.
 
-### Claude Code
+---
 
-Copy the folder:
+## What you get back
+
+**The artifact, not a framework lecture.** By default you get the mail, the memo, the page — no pyramid diagrams, no commentary.
+
+**A structure note where it earns its place.** For mail, memo, report, proposal and executive at standard depth or deeper, the artifact is followed by a few lines naming the core message and its supporting arguments, so the reasoning is checkable without reading a second document.
+
+**The structure itself, when that's the job.** In `analysis` and `critique` the structure *is* the product and is written out in full. The complete pyramid including assumptions is available on request in any mode.
+
+---
+
+## What it costs and what it can't do
+
+It doesn't make the model smarter, and it doesn't rescue thin material — it only makes the gap visible. For a two-line answer it's overhead; skip it. And Claude can do much of this without the skill if you describe what you want well enough. The gain is not having to describe it every time, and getting the same standard on a bad prompting day.
+
+The skill is only as good as its material. Raw notes, numbers, quotes, a thread — the more real substance, the more load-bearing the argument.
+
+---
+
+## Installation
+
+A skill is a folder of instructions, not code. On invocation, `SKILL.md` is loaded into Claude's context and changes how it approaches that one response; when the response ends, so does its influence. It calls no tools and has no environment dependency — the frontmatter declares only `name` and `description`, and nothing in the skill touches a tool, an MCP server, or a platform API. It therefore runs anywhere Claude loads skills. Only the install route differs.
+
+**Claude Code** — clone into your skills directory:
 
 ```bash
-# Personal — available in every project
-cp -R minto ~/.claude/skills/
-
-# Or per project, checked into the repo
-cp -R minto .claude/skills/
+git clone https://github.com/smplx-c/minto-skill.git ~/.claude/skills/minto
 ```
 
-### Verifying the install
+The target directory must be `minto`, matching the skill name — the repository is called `minto-skill` to keep it legible on GitHub, but the folder Claude loads should not be.
 
-Invoke an evidence-dependent mode with nothing to work from:
+**Cowork / Claude Desktop** — download `minto.skill` from the [latest release](https://github.com/smplx-c/minto-skill/releases/latest) and drop it into a chat. The file card shows **Save skill**, provided your organization permits skill creation.
+
+Install the whole folder either way, never `SKILL.md` on its own. Without `references/` the skill fails silently rather than visibly: it instructs itself to read the renderer for the chosen mode, doesn't find it, and produces generically structured output.
+
+**Verifying** — invoke an evidence-dependent mode with nothing to work from:
 
 ```
 /minto report
 ```
 
-Installed correctly, the skill asks for material or states plainly what it can and cannot conclude — its input triage refuses to manufacture a pyramid to fill the requested shape. A polished generic report instead means the skill didn't load. No effect at all usually means a wrong path, or folder structure lost while copying.
+Installed correctly, the skill asks for material or states plainly what it can and cannot conclude. A polished generic report instead means it didn't load.
 
 ---
 
-## Using it
+## Invoking it
 
-### Invocation
-
-The skill runs **only when explicitly invoked**. It will not fire on its own just because some text could use structuring — deliberately, so it doesn't turn every mail into a consulting deliverable.
+The skill runs **only when explicitly invoked** — deliberately, so it doesn't turn every mail into a consulting deliverable.
 
 ```
 /minto [mode] [modifier]
@@ -100,12 +98,16 @@ minto, rebuild this as a proposal
 please apply the pyramid principle
 ```
 
-Without a mode, the skill infers one from context. An explicit mode always wins — `/minto mail` on a report gives you a mail, not a shortened report.
+Without a mode, the skill infers one from the task and the material in front of it. An explicit mode always wins — `/minto mail` on a report gives you a mail, not a shortened report. Treat the slash syntax as an API.
 
-### Modes
+It works best with substance rather than a bare instruction. Instead of "write a mail about the numbers", paste the numbers, say who reads it, and say what you want them to do.
+
+---
+
+## Fourteen modes — by the shape of the output
 
 | Mode | For |
-| --- | --- |
+|---|---|
 | `mail` | emails and replies |
 | `memo` | internal decision memos, recommendations |
 | `report` | evidence-backed analysis, documented |
@@ -123,51 +125,53 @@ Without a mode, the skill infers one from context. An explicit mode always wins 
 
 `critique` and `rewrite` are deliberately separate. Paste text without a clear instruction and `critique` wins — a critique is reversible, an unrequested rewrite discards your version.
 
-### Modifiers
+### Three tiers — by how much authority the pyramid has
 
-Free-form, no fixed vocabulary: `short`, `deep`, `seo`, `board`, `meta`, `ecommerce`, `strict`. They change depth, channel, audience, tone or length — never the logic standard.
+The renderers do not all give the argument the same control over the visible result, and knowing which tier you're in explains why the same input can look so different.
 
-### What you get back
+| Tier | Modes | The pyramid governs |
+|---|---|---|
+| **A** | `mail`, `memo`, `report`, `proposal`, `executive` | reasoning *and* visible structure |
+| **B** | `blogpost`, `slides` | information architecture |
+| **C** | `ad`, `atf`, `landingpage`, `pdp` | only *what* must be communicated and supported |
 
-- **Default:** the artifact only, no framework commentary.
-- **Mail, memo, report, proposal, executive at standard depth or deeper:** the artifact plus a compact structure note (core message and supporting arguments), so the reasoning is checkable without reading a second document.
-- **`analysis` and `critique`:** the structure *is* the product and is written out.
-- **On request:** the full pyramid including assumptions.
+In Tier C, sequence and tone are decided by conversion logic, so the copy may open with a hook, a problem, or tension rather than the answer. The evidence standard is identical in all three — the creative freedom is about expression, never about proof.
 
-### Good inputs
+### Modifiers — by effort
 
-The skill is only as good as its material. Raw notes, numbers, quotes, a thread — the more real substance, the more load-bearing the argument. Given thin material it marks the core message as provisional and names what's missing. It invents nothing: no figures, no testimonials, no proof points. An incomplete pyramid is acceptable; a fabricated one is not.
+Free-form, no fixed vocabulary: `short`, `deep`, `seo`, `board`, `meta`, `ecommerce`, `strict`. They change depth, channel, audience, tone or length — never the logic standard. Depth runs Compact (core message and key arguments) through Standard to Deep (framing, evidence, assumptions, implications).
 
 ---
 
-## How it's built
+## Repository layout
 
 ```
 minto/
-├── SKILL.md                    # thinking engine: logic rules, construction, validation, mode selection
+├── SKILL.md                      the thinking engine — applies to every run
+├── README.md                     this document
 └── references/
-    ├── tier-a.md               # mail, memo, report, proposal, executive
-    ├── tier-b.md               # blogpost, slides
-    ├── tier-c.md               # ad, atf, landingpage, pdp
-    └── meta-modes.md           # analysis, critique, rewrite
+    ├── tier-a.md                 mail, memo, report, proposal, executive
+    ├── tier-b.md                 blogpost, slides
+    ├── tier-c.md                 ad, atf, landingpage, pdp
+    └── meta-modes.md             analysis, critique, rewrite
 ```
 
-Each invocation loads `SKILL.md` plus **exactly one** reference file — the one matching the chosen mode. That keeps context cost at roughly half a single-file version without cutting any content. This README is never loaded by Claude; it is for people.
+`SKILL.md` holds only what applies to every run: the logic rules, pyramid construction, validation, epistemic discipline, and mode selection. Each invocation loads it plus **exactly one** reference file — the renderer for the chosen mode. That keeps context cost at roughly half a single-file version without cutting content. This README is never loaded by Claude; it is for people.
 
-The three tiers differ in how much authority the pyramid has over the visible result. In **Tier A** it governs the visible structure too; in **Tier B** the information architecture; in **Tier C** only *what* has to be communicated and supported — sequence and tone there are decided by conversion logic. The evidence standard is identical in all three.
+---
 
 ## Editing and repackaging
 
 Renderer changes belong in the relevant file under `references/`; changes to the thinking standard belong in `SKILL.md`. A rule that applies to several modes belongs in `SKILL.md` exactly once — not repeated per mode.
 
-After editing, repackage:
+After editing, repackage and publish:
 
 ```bash
-cd ~/.claude/skills/synced/skill-creator
-python -m scripts.package_skill /path/to/minto
+python -m scripts.package_skill /path/to/minto     # from the skill-creator directory
+gh release create v1.1.0 minto.skill --title "v1.1.0" --notes "…"
 ```
 
-This validates the frontmatter and produces `minto.skill`. When updating, leave the name `minto` unchanged — otherwise you get a second skill instead of a new version.
+Packaging validates the frontmatter. Keep the skill name `minto` unchanged across versions — a new name produces a second skill rather than an update. The built `.skill` is a release asset only and is gitignored, so the download link always points at a tagged, deliberate build rather than whatever last landed on `main`.
 
 ## Open
 
