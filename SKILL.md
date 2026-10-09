@@ -23,7 +23,7 @@ The **renderers** — the format-specific instructions for turning a validated p
 | --- | --- |
 | `references/tier-a.md` | `mail`, `memo`, `report`, `proposal`, `executive` |
 | `references/tier-b.md` | `blogpost`, `slides` |
-| `references/tier-c.md` | `ad`, `atf`, `landingpage`, `pdp` |
+| `references/tier-c.md` | `ad`, `atf`, `landingpage`, `pdp`, `flow` |
 | `references/meta-modes.md` | `analysis`, `critique`, `rewrite` |
 
 Reading the renderer is not optional. The thinking standard in this file is constant; the renderer decides what the output actually looks like, and skipping it produces generically-structured output that ignores the format's real constraints.
@@ -75,6 +75,7 @@ If `/minto` is invoked without a mode, infer it from the task and active materia
 | Deck, presentation, slide storyline | `slides` |
 | Hero section, above-the-fold copy | `atf` |
 | A full page with one conversion goal | `landingpage` |
+| A sequence of automated lifecycle messages — welcome, cart, post-purchase, winback | `flow` |
 | Shopify or e-commerce product detail page | `pdp` |
 | Advertising copy for a specific channel | `ad` |
 | Raw data, notes, or research with no settled answer | `analysis` |
@@ -360,7 +361,7 @@ The renderers do not all give Minto the same authority over the final artifact. 
 
 * **Tier A** — Minto controls reasoning *and* visible communication structure: `mail`, `memo`, `report`, `proposal`, `executive`.
 * **Tier B** — Minto controls information architecture and structure: `blogpost`, `slides`.
-* **Tier C** — Minto controls message architecture only; persuasion and conversion control the visible expression: `ad`, `atf`, `landingpage`, `pdp`.
+* **Tier C** — Minto controls message architecture only; persuasion and conversion control the visible expression: `ad`, `atf`, `landingpage`, `pdp`, `flow`.
 
 ### The Tier C override
 

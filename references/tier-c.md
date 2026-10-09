@@ -1,6 +1,6 @@
 # Tier C Renderers
 
-**Modes:** `ad`, `atf`, `landingpage`, `pdp`
+**Modes:** `ad`, `atf`, `landingpage`, `pdp`, `flow`
 
 The Tier C override is defined once in `SKILL.md` — read it there before using any mode in this file. In short: the pyramid decides **what must be communicated and supported**; conversion and creative principles decide **how it appears**. The evidence standard does not relax.
 
@@ -127,3 +127,51 @@ Product title / proposition → Primary purchase benefit → Price / variant / C
 * Specs are support, not the argument. Never let the spec table become the pitch.
 * Risk reduction (returns, guarantee) belongs near the decision, not buried at the bottom.
 * Match the customer's language, not internal product jargon.
+
+---
+
+## `/minto flow`
+
+Use for a sequence of automated lifecycle messages — welcome, abandoned cart, post-purchase, winback, replenishment, onboarding. Also use it to evaluate an existing sequence.
+
+Every other mode in this skill renders **one** artifact. This one renders an argument that unfolds across several, so the pyramid spans the sequence rather than sitting inside each message.
+
+> A flow is not a set of emails that share a trigger. It is one argument delivered in instalments.
+
+**Establish before writing anything:**
+
+* the trigger, and what it tells you the recipient just did
+* what the recipient knows and believes at entry
+* the single behaviour the flow exists to produce
+* what currently stops them from doing it
+
+That last one sets the length. Message count follows the objections that must be cleared, not a template — a flow with nothing left to resolve should end.
+
+**Build the sequence as the pyramid:**
+
+```text
+Flow Governing Thought  →  the belief or action the whole sequence must produce
+  Message 1 → Key Line 1
+  Message 2 → Key Line 2
+  Message 3 → Key Line 3
+```
+
+Each message carries one Key Line's worth of work: one purpose, one dominant message, and a stated relationship to the one before it.
+
+**Apply the Why test to every message:**
+
+```text
+Why does this message exist?
+Why at this position rather than earlier or later?
+What does the recipient know or believe afterwards that they did not before?
+Which uncertainty or objection does it remove?
+```
+
+If a message has no distinct answer, merge it, move it, or drop it.
+
+* Do not repeat the same argument in successive messages. A sequence that restates its case is one message long and four messages annoying.
+* Do not let every message carry its own full pitch. Progression is the point: relevance, then understanding, then credibility, then objection, then the reason to act now.
+* Where the flow branches on behaviour or customer state, say what the branch assumes about the recipient.
+* Timing is part of the argument. State the interval and why the recipient is ready for the next message by then.
+
+Evaluating an existing flow is the same test run backwards: name each message's intended Key Line, then find the ones that duplicate, the objection nobody answers, and the position no message justifies.

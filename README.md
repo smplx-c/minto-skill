@@ -2,7 +2,7 @@
 
 **Minto makes Claude work out the argument before it writes a word — and then renders that argument in the format you actually need.**
 
-A Claude skill: one thinking engine, fourteen format renderers, and a validation pass that refuses to fill a structure with material it doesn't have.
+A Claude skill: one thinking engine, fifteen format renderers, and a validation pass that refuses to fill a structure with material it doesn't have.
 
 → [**Download `minto.skill`**](https://github.com/smplx-c/minto-skill/releases/latest/download/minto.skill) for Cowork and the Claude app, or clone the folder for Claude Code — see [Installation](#installation).
 
@@ -21,6 +21,10 @@ The same notes, without and with the skill:
 > **With:** "I'd hold the 40k until the mobile PDP is fixed. Traffic isn't our constraint — we're up 17% year over year. The problem is conversion, and it's almost entirely mobile …"
 
 Same facts. Only the second one can be acted on, or argued with.
+
+This failure mode has a name and a measured cost. BetterUp Labs and Stanford's Social Media Lab call it [**workslop**](https://hbr.org/2025/09/ai-generated-workslop-is-destroying-productivity) — "content that appears polished but lacks real substance, offloading cognitive labor onto coworkers." In their survey of 962 US desk workers, 38% reported receiving it and put the cleanup at 3.4 hours a month. Shopify's Tobi Lütke has [a blunter name](https://fortune.com/2026/09/17/shopify-tobias-lutke-ai-slop-grenades/): *"slop grenades that people toss at each other."*
+
+The important part is where the cost lands. Unstructured output is cheap to produce and expensive to read, so nothing stops the person generating it — the hours are spent by whoever has to work out what the thing actually claims. That is the asymmetry this skill attacks. An answer-first structure with its evidence attached to the claims it supports can be checked in a glance and disagreed with precisely, which is the difference between output that looks like work and output that *is* work.
 
 ---
 
@@ -104,7 +108,7 @@ It works best with substance rather than a bare instruction. Instead of "write a
 
 ---
 
-## Fourteen modes — by the shape of the output
+## Fifteen modes — by the shape of the output
 
 | Mode | For |
 |---|---|
@@ -119,6 +123,7 @@ It works best with substance rather than a bare instruction. Instead of "write a
 | `atf` | above the fold, hero section |
 | `landingpage` | full page with one conversion goal |
 | `pdp` | product detail page (Shopify, e-commerce) |
+| `flow` | automated lifecycle sequence — welcome, cart, winback |
 | `analysis` | thinking tool: what does the data actually say? |
 | `critique` | evaluate existing text, **not** rewrite it |
 | `rewrite` | restructure existing text |
@@ -133,7 +138,7 @@ The renderers do not all give the argument the same control over the visible res
 |---|---|---|
 | **A** | `mail`, `memo`, `report`, `proposal`, `executive` | reasoning *and* visible structure |
 | **B** | `blogpost`, `slides` | information architecture |
-| **C** | `ad`, `atf`, `landingpage`, `pdp` | only *what* must be communicated and supported |
+| **C** | `ad`, `atf`, `landingpage`, `pdp`, `flow` | only *what* must be communicated and supported |
 
 In Tier C, sequence and tone are decided by conversion logic, so the copy may open with a hook, a problem, or tension rather than the answer. The evidence standard is identical in all three — the creative freedom is about expression, never about proof.
 
@@ -175,4 +180,4 @@ Packaging validates the frontmatter. Keep the skill name `minto` unchanged acros
 
 ## Open
 
-There are no evals yet. Two or three realistic test prompts with a baseline comparison would be the sensible next step — particularly for mode inference when no mode is given, and for how much structure the skill exposes.
+`evals/flow.md` holds two test prompts for `flow` — one build, one evaluation — with pass and fail criteria to read the output against. The other fourteen modes have none yet. The two gaps worth closing next are mode inference when no mode is given, and how much structure the skill exposes by default.
