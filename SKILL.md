@@ -28,6 +28,8 @@ The **renderers** — the format-specific instructions for turning a validated p
 
 Reading the renderer is not optional. The thinking standard in this file is constant; the renderer decides what the output actually looks like, and skipping it produces generically-structured output that ignores the format's real constraints.
 
+**If the reference file for the selected mode is not in the installation**, say so in one line before the output, name the mode affected, and continue on this file's rules alone. Do not reconstruct the renderer from memory and do not present the result as a full run — the thinking will hold, but the format's specific constraints will be missing. A missing reference file has one cause: the skill was installed from `SKILL.md` alone instead of from the packaged skill or the whole folder. Say that too, so it gets fixed rather than worked around.
+
 ## Language
 
 Match the user's language unless the user explicitly requests another language.

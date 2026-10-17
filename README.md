@@ -72,7 +72,7 @@ The target directory must be `minto`, matching the skill name — the repository
 
 **Cowork / Claude Desktop** — download `minto.skill` from the [latest release](https://github.com/smplx-c/minto-skill/releases/latest) and drop it into a chat. The file card shows **Save skill**, provided your organization permits skill creation.
 
-Install the whole folder either way, never `SKILL.md` on its own. Without `references/` the skill fails silently rather than visibly: it instructs itself to read the renderer for the chosen mode, doesn't find it, and produces generically structured output.
+Install the whole folder either way, never `SKILL.md` on its own. Without `references/` the skill still runs — the thinking engine is all in `SKILL.md` — but every renderer is missing, so the output ignores the chosen format's specific constraints. Since v1.1.1 the skill detects this and says which mode is affected instead of quietly substituting its own structure. Observed in the wild once, on `/minto atf`: a skill updated from a bare `SKILL.md` card rather than from the package.
 
 **Verifying** — invoke an evidence-dependent mode with nothing to work from:
 
